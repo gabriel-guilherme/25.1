@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce0beuw32mvxg"]
+[gd_scene load_steps=7 format=3 uid="uid://ce0beuw32mvxg"]
 
 [ext_resource type="Script" uid="uid://istvry58nuqu" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://bu5m8w7a8fov" path="res://Sprites/ChatGPT Image 31 de mai. de 2025, 17_49_06.png" id="1_l8h54"]
+[ext_resource type="PackedScene" uid="uid://pxp17un6p6y7" path="res://utility/HurtBox/hurt_box.tscn" id="3_btcbx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ntmi"]
 radius = 366.667
 height = 866.667
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_btcbx"]
+radius = 14.0201
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gwnis"]
+radius = 368.001
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_4ntmi")
 
@@ -16,9 +25,44 @@ scale = Vector2(0.03, 0.03)
 texture = ExtResource("1_l8h54")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 2)
 scale = Vector2(0.03, 0.03)
 shape = SubResource("CapsuleShape2D_4ntmi")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.03, 0.03)
+
+[node name="HurtBox" parent="." instance=ExtResource("3_btcbx")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, 1.25)
+shape = SubResource("CircleShape2D_btcbx")
+
+[node name="Attack" type="Node2D" parent="."]
+
+[node name="BananaTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 1.5
+
+[node name="BananaAttachTimer" type="Timer" parent="Attack/BananaTimer"]
+unique_name_in_owner = true
+wait_time = 0.075
+
+[node name="EnemyDetection" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection"]
+shape = SubResource("CircleShape2D_gwnis")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="Attack/BananaTimer" to="." method="_on_banana_timer_timeout"]
+[connection signal="timeout" from="Attack/BananaTimer/BananaAttachTimer" to="." method="_on_banana_attach_timer_timeout"]
+[connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
+[connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
+
+[editable path="HurtBox"]

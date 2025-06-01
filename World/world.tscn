@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dik8vc2i4kvim"]
+[gd_scene load_steps=5 format=3 uid="uid://dik8vc2i4kvim"]
 
+[ext_resource type="Script" uid="uid://cwfvijh12dyov" path="res://Enemy_Spawner/enemy_spawner.gd" id="1_3f78f"]
 [ext_resource type="Texture2D" uid="uid://v7nk3k66bvh8" path="res://Sprites/Texture_1_Diffuse.png" id="1_62w18"]
 [ext_resource type="PackedScene" uid="uid://ce0beuw32mvxg" path="res://Player/player.tscn" id="2_8a836"]
-[ext_resource type="PackedScene" uid="uid://c02suxnugg8bc" path="res://Enemy/enemy.tscn" id="3_j8job"]
+[ext_resource type="PackedScene" uid="uid://dnoswy272fvvk" path="res://Enemy_Spawner/enemy_spawner.tscn" id="4_k8do8"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_3f78f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -16,5 +18,4 @@ region_rect = Rect2(0, 0, 80000, 80000)
 
 [node name="Player" parent="." instance=ExtResource("2_8a836")]
 
-[node name="Enemy" parent="." instance=ExtResource("3_j8job")]
-position = Vector2(131, -40)
+[node name="EnemySpawner" parent="." instance=ExtResource("4_k8do8")]

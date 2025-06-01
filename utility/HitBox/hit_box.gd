@@ -1,8 +1,8 @@
 extends Area2D
 
 @export var damage = 1
-@onready var collision = $CollisionShade2D
-@onready var disableTimer = $DisableHitBoxTimer
+@onready var collision = $CollisionShape2D
+@onready var disableTimer = $Timer
 
 func tempdisable():
 	collision.call_deffered("set", "disabled", true)
