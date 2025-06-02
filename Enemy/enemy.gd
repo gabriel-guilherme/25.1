@@ -11,7 +11,7 @@ var is_stunned = false
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
-@onready var sprite = $Sprite2D
+@onready var sprite = $AnimatedSprite2D
 @onready var sound_hit = $sound_hit
 
 signal remove_from_array(object)
@@ -47,6 +47,9 @@ func slow(duration, power):
 	movement_speed = old_movespeed
 
 func death():
+	sprite.play("disappear")
+	await sprite.animation_finished
+	
 	emit_signal("remove_from_array", self)
 	
 	var new_gem = exp_gem.instantiate()

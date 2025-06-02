@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var movement_speed = 40.0
 @export var hp = 80
-@onready var sprite = $Sprite2D
+@onready var sprite = $AnimatedSprite2D
 
 var experience = 0
 var experience_level = 1
@@ -71,6 +71,13 @@ func movement():
 		sprite.flip_h = true
 	elif mov.x > 0:
 		sprite.flip_h = false
+
+	if mov.length() > 0:
+		if sprite.animation != "walk":
+			sprite.play("walk")
+	else:
+		if sprite.animation != "idle":
+			sprite.play("idle")
 
 	velocity = mov.normalized() * movement_speed
 	move_and_slide()
