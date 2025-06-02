@@ -1,23 +1,23 @@
+[gd_scene load_steps=8 format=3 uid="uid://dik8vc2i4kvim"]
 
-[gd_scene load_steps=9 format=3 uid="uid://dik8vc2i4kvim"]
-
+[ext_resource type="Script" uid="uid://bbr35ij6hl72w" path="res://World/world.gd" id="1_3f78f"]
 [ext_resource type="Texture2D" uid="uid://v7nk3k66bvh8" path="res://Sprites/Texture_1_Diffuse.png" id="1_62w18"]
 [ext_resource type="PackedScene" uid="uid://ce0beuw32mvxg" path="res://Player/player.tscn" id="2_8a836"]
 [ext_resource type="PackedScene" uid="uid://dnoswy272fvvk" path="res://Enemy_Spawner/enemy_spawner.tscn" id="4_k8do8"]
 [ext_resource type="Script" uid="uid://cejccdt7ra3gx" path="res://utility/spawn_info.gd" id="5_k8do8"]
 [ext_resource type="PackedScene" uid="uid://c02suxnugg8bc" path="res://Enemy/enemy.tscn" id="6_bkhv4"]
-[ext_resource type="PackedScene" uid="uid://u0iijug1krld" path="res://Item/ExperienceGem/experience_gem.tscn" id="7_yf0ba"]
 
 [sub_resource type="Resource" id="Resource_yf0ba"]
 script = ExtResource("5_k8do8")
 time_start = 0
-time_end = 60
+time_end = 0
 enemy = ExtResource("6_bkhv4")
 enemy_num = 25
 enemy_spawn_delay = 1
 metadata/_custom_type_script = "uid://cejccdt7ra3gx"
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_3f78f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_repeat = 2
@@ -28,13 +28,8 @@ region_enabled = true
 region_rect = Rect2(0, 0, 80000, 80000)
 
 [node name="Player" parent="." instance=ExtResource("2_8a836")]
-banana_attackspeed = 1.5
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_k8do8")]
 spawns = Array[ExtResource("5_k8do8")]([SubResource("Resource_yf0ba")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
-
-[node name="ExperienceGem" parent="Loot" instance=ExtResource("7_yf0ba")]
-position = Vector2(113, -35)
-experience = 50

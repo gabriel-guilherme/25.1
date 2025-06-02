@@ -8,6 +8,8 @@ var base_movement_speed = movement_speed
 var knockback = Vector2.ZERO
 var is_stunned = false
 
+signal enemy_died
+
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $AnimatedSprite2D
@@ -55,6 +57,7 @@ func death():
 	await sprite.animation_finished
 	
 	emit_signal("remove_from_array", self)
+	emit_signal("enemy_died")
 	
 	var new_gem = exp_gem.instantiate()
 	new_gem.global_position = global_position

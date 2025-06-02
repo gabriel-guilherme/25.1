@@ -21,11 +21,29 @@ func _ready():
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
 		1:
-			hp = 2
+			hp = 1
 			speed = 100
 			damage = 5
 			knockback = 100
-			attack_size = 1.0
+			attack_size = 1.0 * (1 + player.attack_size)
+		2:
+			hp = 1
+			speed = 100
+			damage = 5
+			knockback = 100
+			attack_size = 1.0 * (1 + player.attack_size)
+		3:
+			hp = 2
+			speed = 100
+			damage = 8
+			knockback = 100
+			attack_size = 1.0 * (1 + player.attack_size)
+		4:
+			hp = 2
+			speed = 100
+			damage = 8
+			knockback = 100
+			attack_size = 1.0 * (1 + player.attack_size)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
