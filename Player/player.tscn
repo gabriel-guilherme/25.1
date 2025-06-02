@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ce0beuw32mvxg"]
+[gd_scene load_steps=42 format=3 uid="uid://ce0beuw32mvxg"]
 
 [ext_resource type="Script" uid="uid://istvry58nuqu" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://c5nvj13dubrwn" path="res://Sprites/gorilla sprite sheet 256x256.png" id="2_fhl08"]
@@ -245,7 +245,10 @@ height = 866.667
 radius = 14.0201
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gwnis"]
-radius = 54.0
+radius = 368.49
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtle1"]
+radius = 41.0122
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
 radius = 51.0882
@@ -259,7 +262,9 @@ collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_4ntmi")
-banana_orbit_level = 1
+movement_speed = 100.0
+banana_attackspeed = 0.1
+punch_attackspeed = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
@@ -292,7 +297,7 @@ shape = SubResource("CircleShape2D_btcbx")
 
 [node name="BananaTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
-wait_time = 1.5
+wait_time = 10.0
 
 [node name="BananaAttachTimer" type="Timer" parent="Attack/BananaTimer"]
 unique_name_in_owner = true
@@ -300,10 +305,11 @@ wait_time = 0.075
 
 [node name="PunchTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
-wait_time = 10.0
+wait_time = 1.5
 
 [node name="PunchAttachTimer" type="Timer" parent="Attack/PunchTimer"]
 unique_name_in_owner = true
+wait_time = 0.075
 
 [node name="BananaPeelTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
@@ -319,15 +325,16 @@ monitorable = false
 shape = SubResource("CircleShape2D_gwnis")
 
 [node name="EnemyDetection2" type="Area2D" parent="."]
-visible = false
 collision_layer = 5
 collision_mask = 5
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection2"]
-shape = SubResource("CircleShape2D_gwnis")
+position = Vector2(-1, 5)
+shape = SubResource("CircleShape2D_vtle1")
 
 [node name="GrabArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -335,6 +342,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_k53q1")
 
 [node name="CollectArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
