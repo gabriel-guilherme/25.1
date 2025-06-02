@@ -3,7 +3,6 @@ extends Area2D
 @export var level = 1
 @export var hp = 1
 @export var speed = 100
-@export var wait_time = 1.5
 @export var damage = 5
 @export var knockback = 100
 @export var attack_size = 1.0
@@ -21,10 +20,10 @@ func _ready():
 	rotation = angle.angle() + deg_to_rad(135)
 	match level:
 		1:
-			hp = 2
-			speed = 100
-			damage = 5
-			knockback = 100
+			hp = 5
+			speed = 50
+			damage = 20
+			knockback = 300
 			attack_size = 1.0
 
 

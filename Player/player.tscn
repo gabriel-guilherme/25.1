@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce0beuw32mvxg"]
+[gd_scene load_steps=11 format=3 uid="uid://ce0beuw32mvxg"]
 
 [ext_resource type="Script" uid="uid://istvry58nuqu" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://bu5m8w7a8fov" path="res://Sprites/ChatGPT Image 31 de mai. de 2025, 17_49_06.png" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://pxp17un6p6y7" path="res://utility/HurtBox/hurt_box.tscn" id="3_btcbx"]
+[ext_resource type="Texture2D" uid="uid://cmwx2oi20bjcn" path="res://Sprites/GUI/exp_background.png" id="4_k53q1"]
+[ext_resource type="Texture2D" uid="uid://dowfwf3vwb4q5" path="res://Sprites/GUI/exp_progress.png" id="5_fhl08"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ntmi"]
 radius = 366.667
@@ -12,13 +14,21 @@ height = 866.667
 radius = 14.0201
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gwnis"]
-radius = 368.001
+radius = 54.0
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_k53q1"]
+radius = 51.0882
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fhl08"]
+radius = 8.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+top_level = true
 collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_4ntmi")
+banana_orbit_level = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["player"]]
 scale = Vector2(0.03, 0.03)
@@ -34,6 +44,7 @@ shape = SubResource("CapsuleShape2D_4ntmi")
 scale = Vector2(0.03, 0.03)
 
 [node name="HurtBox" parent="." instance=ExtResource("3_btcbx")]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -51,7 +62,19 @@ wait_time = 1.5
 unique_name_in_owner = true
 wait_time = 0.075
 
+[node name="PunchTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 10.0
+
+[node name="PunchAttachTimer" type="Timer" parent="Attack/PunchTimer"]
+unique_name_in_owner = true
+
+[node name="BananaPeelTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 1.5
+
 [node name="EnemyDetection" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 4
 monitorable = false
@@ -59,10 +82,93 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection"]
 shape = SubResource("CircleShape2D_gwnis")
 
+[node name="EnemyDetection2" type="Area2D" parent="."]
+visible = false
+collision_layer = 5
+collision_mask = 5
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetection2"]
+shape = SubResource("CircleShape2D_gwnis")
+
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_k53q1")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_fhl08")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_under = ExtResource("4_k53q1")
+texture_progress = ExtResource("5_fhl08")
+
+[node name="lvl_label" type="Label" parent="GUILayer/GUI/ExperienceBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 544.0
+offset_top = -2.0
+offset_right = 644.0
+offset_bottom = 21.0
+text = "Level: 1"
+
+[node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+layout_mode = 0
+offset_left = 800.0
+offset_right = 1000.0
+offset_bottom = 250.0
+
+[node name="lbl_LevelUp" type="Label" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "Level Up !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeOptions" type="VBoxContainer" parent="GUILayer/GUI/LevelUp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 190.0
+offset_bottom = 100.0
+
+[node name="sound_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp"]
+unique_name_in_owner = true
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/BananaTimer" to="." method="_on_banana_timer_timeout"]
 [connection signal="timeout" from="Attack/BananaTimer/BananaAttachTimer" to="." method="_on_banana_attach_timer_timeout"]
+[connection signal="timeout" from="Attack/PunchTimer" to="." method="_on_punch_timer_timeout"]
+[connection signal="timeout" from="Attack/PunchTimer/PunchAttachTimer" to="." method="_on_punch_attach_timer_timeout"]
+[connection signal="timeout" from="Attack/BananaPeelTimer" to="." method="_on_banana_peel_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
 [connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
+[connection signal="body_entered" from="EnemyDetection2" to="." method="_on_enemy_detection_2_body_entered"]
+[connection signal="body_exited" from="EnemyDetection2" to="." method="_on_enemy_detection_2_body_exited"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]

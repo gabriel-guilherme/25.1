@@ -32,7 +32,7 @@ func _on_timer_timeout() -> void:
 					enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
 					counter += 1
-					print("MAMOU_LES")
+					#print("MAMOU_LES")
 
 func get_random_position():
 	var vpr = get_viewport_rect().size * randf_range(1.1, 1.4)

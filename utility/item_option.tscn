@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://qo6v04ba08kg"]
+
+[ext_resource type="Script" uid="uid://c8f4v7ambhb7s" path="res://utility/item_option.gd" id="1_mv6x1"]
+[ext_resource type="Texture2D" uid="uid://bxxvt5a60ptub" path="res://Sprites/fruit_banana.png" id="1_ryhir"]
+
+[node name="ItemOption" type="ColorRect"]
+custom_minimum_size = Vector2(180, 50)
+anchors_preset = -1
+anchor_right = 0.281
+anchor_bottom = 0.139
+offset_right = 0.159988
+offset_bottom = -0.0400047
+color = Color(0.329158, 0.329158, 0.329158, 1)
+script = ExtResource("1_mv6x1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 1)
+
+[node name="ItemIcon" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 287.0
+offset_bottom = 253.0
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("1_ryhir")
+
+[node name="label_name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 1.0
+offset_right = 86.0
+offset_bottom = 24.0
+text = "Name"
+horizontal_alignment = 1
+
+[node name="label_desc" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 166.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 8
+text = "Description"
+autowrap_mode = 3
+
+[node name="label_level" type="Label" parent="."]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 3.0
+offset_right = 174.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 12
+text = "Level: 1"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
