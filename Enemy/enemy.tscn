@@ -158,7 +158,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"disappear",
-"speed": 7.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -257,8 +257,9 @@ texture_filter = 1
 position = Vector2(2, -6)
 scale = Vector2(1.35, 1.35)
 sprite_frames = SubResource("SpriteFrames_llu5w")
-animation = &"disappear"
+animation = &"walk"
 autoplay = "walk"
+frame_progress = 0.243078
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

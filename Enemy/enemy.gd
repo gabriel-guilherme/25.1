@@ -47,6 +47,7 @@ func slow(duration, power):
 	movement_speed = old_movespeed
 
 func death():
+	movement_speed = 0
 	sprite.play("disappear")
 	await sprite.animation_finished
 	

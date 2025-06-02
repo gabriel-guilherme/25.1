@@ -161,7 +161,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8viyr")
 }],
-"loop": true,
+"loop": false,
 "name": &"attach",
 "speed": 8.0
 }, {
@@ -209,7 +209,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m0h3t")
 }],
-"loop": true,
+"loop": false,
 "name": &"stomp",
 "speed": 7.0
 }, {
@@ -265,9 +265,10 @@ banana_orbit_level = 1
 position = Vector2(0, -13)
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_x3vf3")
-animation = &"walk"
+animation = &"attach"
 autoplay = "idle"
-frame_progress = 0.925232
+frame = 11
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
