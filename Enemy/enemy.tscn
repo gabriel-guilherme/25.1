@@ -249,8 +249,10 @@ collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_px1sc")
+
 movement_speed = 10.0
 hp = 10
+
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -259,7 +261,7 @@ scale = Vector2(1.35, 1.35)
 sprite_frames = SubResource("SpriteFrames_llu5w")
 animation = &"walk"
 autoplay = "walk"
-frame_progress = 0.243078
+frame_progress = 0.839078
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

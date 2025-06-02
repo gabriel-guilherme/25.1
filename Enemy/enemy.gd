@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var movement_speed = 20.0
 var base_movement_speed = movement_speed
 @export var hp = 20
@@ -15,6 +14,9 @@ signal enemy_died
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $AnimatedSprite2D
 @onready var sound_hit = $sound_hit
+
+#enemy spawner
+@onready var enemySpawner = get_node("/root/World/EnemySpawner")
 
 signal remove_from_array(object)
 
@@ -49,6 +51,7 @@ func slow(duration, power):
 	movement_speed = old_movespeed
 
 func death():
+	enemySpawner.increase_defeated()
 	movement_speed = 0
 	sprite.play("disappear")
 	await sprite.animation_finished
@@ -62,12 +65,17 @@ func death():
 	loot_base.call_deferred("add_child", new_gem)
 	queue_free()
 
+var is_dead = false  # Nova flag
+
 func _on_hurt_box_hurt(damage: Variant, angle, knockback_amount) -> void:
+	if is_dead:
+		return  # Se já estiver morrendo, ignora o resto
+
 	hp -= damage
 	knockback = angle * knockback_amount
-	#print("FAÇA A LUZ")
+
 	if hp <= 0:
+		is_dead = true  # Marca como morto para evitar chamadas múltiplas
 		death()
-		
 	else:
 		sound_hit.play()

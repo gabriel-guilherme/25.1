@@ -262,9 +262,12 @@ collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_4ntmi")
+
 movement_speed = 100.0
 banana_attackspeed = 0.1
 punch_attackspeed = 2.0
+banana_orbit_level = 1
+
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)

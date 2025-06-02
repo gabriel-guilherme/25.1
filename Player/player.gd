@@ -57,6 +57,7 @@ var enemy_close_punch = []
 @onready var itemOptions = preload("res://utility/item_option.tscn")
 @onready var soundLevelUp = get_node("%sound_levelup")
 
+
 #UPGRADES
 var collected_upgrades = []
 var upgrade_options = []
@@ -64,11 +65,17 @@ var armor = 0
 var speed = 0
 var spell_size = 0
 
+#enemy spawner
+@onready var enemySpawner = get_node("/root/World/EnemySpawner")
+
+
 func _ready():
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
 func _physics_process(_delta):
+	if enemySpawner.enemy_defeated >= enemySpawner.max_enemy_per_wave:
+		levelup()
 	movement()
 
 func movement():
@@ -218,7 +225,7 @@ func calculate_experience(gem_exp):
 		
 		experience = 0
 		exp_required = calculate_experiencecap()
-		levelup()
+		# levelup()
 
 	else:
 		experience += collected_experience
@@ -241,6 +248,12 @@ func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.max_value = set_max_value
 
 func levelup():
+	get_tree().paused = true
+	enemySpawner.reset_spawned()
+	
+	sprite.play("dominance")
+	await get_tree().create_timer(0.5).timeout
+	
 	soundLevelUp.play()
 	lbLevel.text = str("Level: ", experience_level)
 	var tween = levelPanel.create_tween()
@@ -254,7 +267,7 @@ func levelup():
 		option_choice.item = get_random_item()
 		upgradeOptions.add_child(option_choice)
 		options += 1
-	get_tree().paused = true
+	
 
 func upgrade_character(upgrade):
 	match upgrade:
@@ -336,6 +349,7 @@ func upgrade_character(upgrade):
 	levelPanel.position = Vector2(800, 50)
 	get_tree().paused = false
 	calculate_experience(0)
+
 	
 	attack()
 
@@ -362,3 +376,6 @@ func get_random_item():
 		return randomitem
 	else:
 		return null
+  
+  enemySpawner.is_spawning = true
+

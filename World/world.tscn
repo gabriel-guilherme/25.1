@@ -1,6 +1,6 @@
+
 [gd_scene load_steps=9 format=3 uid="uid://dik8vc2i4kvim"]
 
-[ext_resource type="Script" uid="uid://bbr35ij6hl72w" path="res://World/world.gd" id="1_3f78f"]
 [ext_resource type="Texture2D" uid="uid://v7nk3k66bvh8" path="res://Sprites/Texture_1_Diffuse.png" id="1_62w18"]
 [ext_resource type="PackedScene" uid="uid://ce0beuw32mvxg" path="res://Player/player.tscn" id="2_8a836"]
 [ext_resource type="PackedScene" uid="uid://dnoswy272fvvk" path="res://Enemy_Spawner/enemy_spawner.tscn" id="4_k8do8"]
@@ -18,7 +18,6 @@ enemy_spawn_delay = 1
 metadata/_custom_type_script = "uid://cejccdt7ra3gx"
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_3f78f")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_repeat = 2
