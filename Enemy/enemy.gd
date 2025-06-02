@@ -62,13 +62,17 @@ func death():
 	loot_base.call_deferred("add_child", new_gem)
 	queue_free()
 
+var is_dead = false  # Nova flag
+
 func _on_hurt_box_hurt(damage: Variant, angle, knockback_amount) -> void:
-	# print("frame: %d | damage: %d | hp: %d" % [Engine.get_frames_drawn(), damage,hp])
+	if is_dead:
+		return  # Se já estiver morrendo, ignora o resto
+
 	hp -= damage
 	knockback = angle * knockback_amount
-	#print("FAÇA A LUZ")
+
 	if hp <= 0:
+		is_dead = true  # Marca como morto para evitar chamadas múltiplas
 		death()
-		
 	else:
 		sound_hit.play()
