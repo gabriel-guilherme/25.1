@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var movement_speed = 20.0
 var base_movement_speed = movement_speed
 @export var hp = 20
@@ -60,6 +59,7 @@ func death():
 	queue_free()
 
 func _on_hurt_box_hurt(damage: Variant, angle, knockback_amount) -> void:
+	print("frame: %d | damage: %d | hp: %d" % [Engine.get_frames_drawn(), damage,hp])
 	hp -= damage
 	knockback = angle * knockback_amount
 	#print("FAÇA A LUZ")
