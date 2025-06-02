@@ -264,3 +264,4 @@ func upgrade_character(upgrade):
 	levelPanel.position = Vector2(800, 50)
 	get_tree().paused = false
 	calculate_experience(0)
+	enemySpawner.is_spawning = true

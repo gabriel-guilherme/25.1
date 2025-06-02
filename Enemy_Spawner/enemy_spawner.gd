@@ -5,6 +5,7 @@ extends Node2D
 @export var max_enemy_per_wave = 25
 var enemy_spawned = 0
 var enemy_defeated = 0
+var is_spawning = true
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -22,6 +23,8 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	time += 1
+	if not is_spawning:
+		return
 	var enemy_spawns = spawns
 	for i in enemy_spawns:
 		if time >= i.time_start and time <= i.time_end:
@@ -40,6 +43,7 @@ func _on_timer_timeout() -> void:
 						counter += 1
 						enemy_spawned += 1
 					else:
+						is_spawning = false
 						return
 
 func get_random_position():
