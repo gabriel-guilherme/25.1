@@ -2,6 +2,10 @@ extends Node2D
 
 @export var spawns: Array[Spawn_info] = []
 
+@export var max_enemy_per_wave = 25
+var enemy_spawned = 0
+var enemy_defeated = 0
+
 @onready var player = get_tree().get_first_node_in_group("player")
 
 var time = 0
@@ -28,11 +32,15 @@ func _on_timer_timeout() -> void:
 				var new_enemy = i.enemy
 				var counter = 0
 				while counter < i.enemy_num:
-					var enemy_spawn = new_enemy.instantiate()
-					enemy_spawn.global_position = get_random_position()
-					add_child(enemy_spawn)
-					counter += 1
-					#print("MAMOU_LES")
+					print("spawned: %d | deafeted %d" % [enemy_spawned, enemy_defeated])
+					if enemy_spawned < max_enemy_per_wave:
+						var enemy_spawn = new_enemy.instantiate()
+						enemy_spawn.global_position = get_random_position()
+						add_child(enemy_spawn)
+						counter += 1
+						enemy_spawned += 1
+					else:
+						return
 
 func get_random_position():
 	var vpr = get_viewport_rect().size * randf_range(1.1, 1.4)
@@ -62,3 +70,12 @@ func get_random_position():
 	var x_spawn = randf_range(spawn_pos1.x, spawn_pos2.x)
 	var y_spawn = randf_range(spawn_pos1.y, spawn_pos2.y)
 	return Vector2(x_spawn, y_spawn)
+
+func reset_spawned():
+	enemy_spawned = 0
+	enemy_defeated = 0
+	print("reset")
+
+func increase_defeated():
+	enemy_defeated += 1
+	print("derrotados: %d" % enemy_defeated)

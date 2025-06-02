@@ -13,6 +13,9 @@ var is_stunned = false
 @onready var sprite = $AnimatedSprite2D
 @onready var sound_hit = $sound_hit
 
+#enemy spawner
+@onready var enemySpawner = get_node("/root/World/EnemySpawner")
+
 signal remove_from_array(object)
 
 var exp_gem = preload("res://Item/ExperienceGem/experience_gem.tscn")
@@ -46,6 +49,7 @@ func slow(duration, power):
 	movement_speed = old_movespeed
 
 func death():
+	enemySpawner.increase_defeated()
 	movement_speed = 0
 	sprite.play("disappear")
 	await sprite.animation_finished
@@ -59,7 +63,7 @@ func death():
 	queue_free()
 
 func _on_hurt_box_hurt(damage: Variant, angle, knockback_amount) -> void:
-	print("frame: %d | damage: %d | hp: %d" % [Engine.get_frames_drawn(), damage,hp])
+	# print("frame: %d | damage: %d | hp: %d" % [Engine.get_frames_drawn(), damage,hp])
 	hp -= damage
 	knockback = angle * knockback_amount
 	#print("FAÇA A LUZ")
