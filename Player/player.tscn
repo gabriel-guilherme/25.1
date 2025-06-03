@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ce0beuw32mvxg"]
+[gd_scene load_steps=43 format=3 uid="uid://ce0beuw32mvxg"]
 
 [ext_resource type="Script" uid="uid://istvry58nuqu" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://c5nvj13dubrwn" path="res://Sprites/gorilla sprite sheet 256x256.png" id="2_fhl08"]
@@ -256,6 +256,9 @@ radius = 51.0882
 [sub_resource type="CircleShape2D" id="CircleShape2D_fhl08"]
 radius = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k53q1"]
+bg_color = Color(0.213159, 0.706101, 0.393887, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 top_level = true
 collision_layer = 2
@@ -358,7 +361,7 @@ offset_bottom = 360.0
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
+offset_right = 64.0
 offset_bottom = 40.0
 texture_under = ExtResource("4_k53q1")
 texture_progress = ExtResource("5_fhl08")
@@ -370,7 +373,7 @@ offset_left = 544.0
 offset_top = -2.0
 offset_right = 644.0
 offset_bottom = 21.0
-text = "Level: 1"
+text = "Wave: 1"
 
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
 unique_name_in_owner = true
@@ -399,6 +402,15 @@ offset_bottom = 100.0
 
 [node name="sound_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp"]
 unique_name_in_owner = true
+
+[node name="HealthBar" type="ProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 342.0
+offset_right = 640.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 10
+theme_override_styles/fill = SubResource("StyleBoxFlat_k53q1")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/BananaTimer" to="." method="_on_banana_timer_timeout"]
