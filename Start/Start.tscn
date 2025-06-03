@@ -37,11 +37,12 @@ alignment = 1
 
 [node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "25.1: Mens x Gorilla"
+text = "25.1: 25men x 1Gorilla"
 
 [node name="CreditLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "credito"
+theme_override_font_sizes/font_size = 12
+text = "desenvolvido por gabriel, gdiael e raphael"
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
