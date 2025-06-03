@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	time += 1
+	print("spawning: " + str(is_spawning))
 	if not is_spawning:
 		return
 	var enemy_spawns = spawns
