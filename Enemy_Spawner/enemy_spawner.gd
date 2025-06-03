@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var spawns: Array[Spawn_info] = []
-@export var base_max_enemy_per_wave = 1
+@export var base_max_enemy_per_wave = 25
 var max_enemy_per_wave = base_max_enemy_per_wave
 
 var current_wave = 0

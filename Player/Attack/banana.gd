@@ -28,22 +28,28 @@ func _ready():
 			attack_size = 1.0 * (1 + player.attack_size)
 		2:
 			hp = 1
-			speed = 100
+			speed = 300
 			damage = 5
-			knockback = 100
+			knockback = 200
 			attack_size = 1.0 * (1 + player.attack_size)
 		3:
 			hp = 2
-			speed = 100
+			speed = 300
 			damage = 8
-			knockback = 100
-			attack_size = 1.0 * (1 + player.attack_size)
+			knockback = 200
+			attack_size = 2.0 * (1 + player.attack_size)
 		4:
-			hp = 2
-			speed = 100
-			damage = 8
-			knockback = 100
-			attack_size = 1.0 * (1 + player.attack_size)
+			hp = 5
+			speed = 400
+			damage = 12
+			knockback = 300
+			attack_size = 2.5 * (1 + player.attack_size)
+	
+	# Escala o sprite
+	$Sprite2D.scale *= attack_size
+
+	# Escala a colisão (ex: se for círculo)
+	$CollisionShape2D.shape.extents *= attack_size
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

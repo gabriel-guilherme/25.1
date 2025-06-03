@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dik8vc2i4kvim"]
+[gd_scene load_steps=9 format=3 uid="uid://dik8vc2i4kvim"]
 
 [ext_resource type="Texture2D" uid="uid://v7nk3k66bvh8" path="res://Sprites/Texture_1_Diffuse.png" id="1_62w18"]
 [ext_resource type="Script" uid="uid://bbr35ij6hl72w" path="res://World/world.gd" id="1_eidgh"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dnoswy272fvvk" path="res://Enemy_Spawner/enemy_spawner.tscn" id="4_k8do8"]
 [ext_resource type="Script" uid="uid://cejccdt7ra3gx" path="res://utility/spawn_info.gd" id="5_k8do8"]
 [ext_resource type="PackedScene" uid="uid://c02suxnugg8bc" path="res://Enemy/enemy.tscn" id="6_bkhv4"]
-[ext_resource type="PackedScene" uid="uid://dy08hqpgdh5qp" path="res://Item/LifeGem/life_gem.tscn" id="6_yf0ba"]
 [ext_resource type="AudioStream" uid="uid://oqwok7xyftqi" path="res://Audio/Fear Factory GBC Loop Donkey Kong Country SNES Music Extended.mp3" id="8_oe8m4"]
 
 [sub_resource type="Resource" id="Resource_k8do8"]
@@ -34,9 +33,6 @@ region_rect = Rect2(0, 0, 80000, 80000)
 spawns = Array[ExtResource("5_k8do8")]([SubResource("Resource_k8do8")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
-
-[node name="life_gem" parent="Loot" instance=ExtResource("6_yf0ba")]
-position = Vector2(169, -59)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3

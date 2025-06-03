@@ -6,11 +6,12 @@ extends Area2D
 @export var angular_speed = 2.0  # Radianos por segundo
 @export var index = 0  # Posição relativa (de 0 a n-1 se for parte do cacho)
 @export var total_bananas = 3
+@export var knockback = 0
 
 var angle_offset = 0.0
 @onready var player = get_tree().get_first_node_in_group("player")
 
-signal remove_from_array(object)
+#signal remove_from_array(object)
 
 func _ready():
 	match level:
@@ -18,18 +19,24 @@ func _ready():
 			damage = 5
 			radius = 100.0
 			angular_speed = 2.0
+			knockback = 0
 		2:
-			damage = 8
+			damage = 5
 			radius = 110.0
-			angular_speed = 2.5
+			angular_speed = 2.0
+			knockback = 0
+			#index = 10
+			#total_bananas = 5
 		3:
-			damage = 12
+			damage = 5
 			radius = 120.0
+			angular_speed = 6.0
+			knockback = 100.0
+		4:
+			damage = 8
+			radius = 150.0
 			angular_speed = 3.0
-		_:
-			damage = 15
-			radius = 130.0
-			angular_speed = 3.5
+			knockback = 100.0
 	
 	if total_bananas > 0:
 		angle_offset = (TAU / total_bananas) * index

@@ -31,7 +31,7 @@ const UPGRADES = {
 	"banana4": {
 		"icon": WEAPON_PATH + "poop.png",
 		"displayname": "Cocô",
-		"details": "",
+		"details": "A arma definitiva de fezes",
 		"level": "Level: 4",
 		"prerequesite": ["banana3"],
 		"type": "weapon"
@@ -47,7 +47,7 @@ const UPGRADES = {
 	"punch2":{
 		"icon": WEAPON_PATH + "punch.png",
 		"displayname": "Punch",
-		"details": "Soco poderoso de curta distancia",
+		"details": "Capacidade de pensar aprimorada te tornando capaz de usar os 2 braços.",
 		"level": "Level: 2",
 		"prerequesite": ["punch1"],
 		"type": "weapon"
@@ -55,7 +55,7 @@ const UPGRADES = {
 	"punch3":{
 		"icon": WEAPON_PATH + "punch.png",
 		"displayname": "Punch",
-		"details": "Soco poderoso de curta distancia",
+		"details": "Aprimora o recuo dos seus golpes",
 		"level": "Level: 3",
 		"prerequesite": ["punch2"],
 		"type": "weapon"
@@ -63,7 +63,7 @@ const UPGRADES = {
 	"punch4":{
 		"icon": WEAPON_PATH + "punch.png",
 		"displayname": "Punch",
-		"details": "Soco poderoso de curta distancia",
+		"details": "3 socos?",
 		"level": "Level: 4",
 		"prerequesite": ["punch3"],
 		"type": "weapon"
@@ -79,7 +79,7 @@ const UPGRADES = {
 	"banana_orbit2":{
 		"icon": WEAPON_PATH + "banana.png",
 		"displayname": "Banana Orbit",
-		"details": "Bananas ao seu redor = proteção garantida",
+		"details": "Seu poder telepático e simbiotico com as bannas aumenta te concedendo maior velocidade de giro",
 		"level": "Level: 2",
 		"prerequesite": ["banana_orbit1"],
 		"type": "weapon"
@@ -87,7 +87,7 @@ const UPGRADES = {
 	"banana_orbit3":{
 		"icon": WEAPON_PATH + "banana.png",
 		"displayname": "Banana Orbit",
-		"details": "Bananas ao seu redor = proteção garantida",
+		"details": "Aprimora ainda mais sua concentração fazendo com que inimigos recuem ao tocar nas bananas telepáticas",
 		"level": "Level: 3",
 		"prerequesite": ["banana_orbit2"],
 		"type": "weapon"
@@ -95,7 +95,7 @@ const UPGRADES = {
 	"banana_orbit4":{
 		"icon": WEAPON_PATH + "banana.png",
 		"displayname": "Banana Orbit",
-		"details": "Bananas ao seu redor = proteção garantida",
+		"details": "Disco de acreção. Adiciona mais uma orbita",
 		"level": "Level: 4",
 		"prerequesite": ["banana_orbit3"],
 		"type": "weapon"
@@ -111,7 +111,7 @@ const UPGRADES = {
 	"banana_peel2":{
 		"icon": WEAPON_PATH + "banana_peel.png",
 		"displayname": "Banana Peel",
-		"details": "Extraindo 100% do potencial de uma banana",
+		"details": "Sua fome aumenta e seu armamento também",
 		"level": "Level: 2",
 		"prerequesite": ["banana_peel1"],
 		"type": "weapon"
@@ -119,7 +119,7 @@ const UPGRADES = {
 	"banana_peel3":{
 		"icon": WEAPON_PATH + "banana_peel.png",
 		"displayname": "Banana Peel",
-		"details": "Extraindo 100% do potencial de uma banana",
+		"details": "Sua saliva fica arraigada na banana garantindo uma maior lentidão",
 		"level": "Level: 3",
 		"prerequesite": ["banana_peel2"],
 		"type": "weapon"
@@ -127,7 +127,7 @@ const UPGRADES = {
 	"banana_peel4":{
 		"icon": WEAPON_PATH + "banana_peel.png",
 		"displayname": "Banana Peel",
-		"details": "Extraindo 100% do potencial de uma banana",
+		"details": "Lentidão extrema",
 		"level": "Level: 4",
 		"prerequesite": ["banana_peel3"],
 		"type": "weapon"
@@ -148,5 +148,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

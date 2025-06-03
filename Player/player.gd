@@ -172,6 +172,14 @@ func _on_banana_peel_timer_timeout():
 
 func spawn_banana_orbit():
 	var total = 5
+	if banana_orbit_level == 1:
+		total = 5
+	elif banana_orbit_level == 2:
+		total = 7
+	elif banana_orbit_level == 3:
+		total = 7
+	elif banana_orbit_level == 4:
+		total = 9
 	for i in range(total):
 		var orbit = banana_orbit_scene.instantiate()
 		orbit.index = i
@@ -183,6 +191,7 @@ func spawn_banana_orbit():
 func drop_banana_peel():
 	var peel = banana_peel.instantiate()
 	peel.global_position = global_position
+	peel.level = banana_peel_level  # passa o nível
 	get_parent().add_child(peel)
 
 # ========== ENEMY DETECTION ==========
@@ -320,13 +329,11 @@ func upgrade_character(upgrade):
 			banana_baseammo += 1
 		"banana2":
 			banana_level = 2
-			banana_baseammo += 1
 		"banana3":
 			banana_level = 3
-			banana_baseammo += 1
 		"banana4":
 			banana_level = 4
-			banana_baseammo += 1
+			banana_baseammo += 2
 		
 		# Punch
 		"punch1":
@@ -337,7 +344,6 @@ func upgrade_character(upgrade):
 			punch_baseammo += 1
 		"punch3":
 			punch_level = 3
-			punch_baseammo += 1
 		"punch4":
 			punch_level = 4
 			punch_baseammo += 1
@@ -356,13 +362,10 @@ func upgrade_character(upgrade):
 		# Banana orbit
 		"banana_orbit1":
 			banana_orbit_level = 1
-			has_spawned_orbit = false
 		"banana_orbit2":
 			banana_orbit_level = 2
-			has_spawned_orbit = false
 		"banana_orbit3":
 			banana_orbit_level = 3
-			has_spawned_orbit = false
 		"banana_orbit4":
 			banana_orbit_level = 4
 			has_spawned_orbit = false
@@ -423,4 +426,4 @@ func get_random_item():
 		return null
 
   
-	enemySpawner.is_spawning = true
+#	enemySpawner.is_spawning = true
