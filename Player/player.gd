@@ -28,14 +28,14 @@ var banana_orbit_scene = preload("res://Player/BananaOrbit/banana_orbit.tscn")
 # Banana
 var banana_ammo = 1
 var banana_baseammo = 1
-@export var banana_attackspeed = 1.5
+@export var banana_attackspeed = .3
 @export var banana_level = 1
 
 # Punch
 var punch_ammo = 1
 var punch_baseammo = 0
 @export var punch_attackspeed = 0.5
-@export var punch_level = 1
+@export var punch_level = 0
 
 # Banana Peel
 @export var banana_peel_attackspeed = 4.0
@@ -57,6 +57,11 @@ var enemy_close_punch = []
 @onready var itemOptions = preload("res://utility/item_option.tscn")
 @onready var soundLevelUp = get_node("%sound_levelup")
 
+#
+#@onready var gameOverScreen = get_node("/root/World/GameOverScreen")
+#@onready var restartButton = gameOverScreen.get_node("%RestartButton")
+#@onready var mainMenuButton = gameOverScreen.get_node("%MainMenuButton")
+
 
 #UPGRADES
 var collected_upgrades = []
@@ -74,8 +79,8 @@ func _ready():
 	set_expbar(experience, calculate_experiencecap())
 
 func _physics_process(_delta):
-	if enemySpawner.enemy_defeated >= enemySpawner.max_enemy_per_wave:
-		levelup()
+	#if enemySpawner.enemy_defeated >= enemySpawner.max_enemy_per_wave:
+	#	levelup()
 	movement()
 
 func movement():
@@ -203,7 +208,25 @@ func _on_enemy_detection_2_body_exited(body: Node2D):
 func _on_hurt_box_hurt(damage: Variant, _angle, _knockback):
 	hp -= clamp(damage - armor, 1.0, 999.0)
 	print(hp)
+	
+	if hp <= 0:
+		die()
 
+
+func die():
+	get_tree().paused = true
+	#gameOverScreen.visible = true
+
+	#restartButton.pressed.connect(restart_game)
+	#mainMenuButton.pressed.connect(go_to_menu)
+
+func restart_game():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+func go_to_menu():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func _on_grab_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
@@ -249,7 +272,7 @@ func set_expbar(set_value = 1, set_max_value = 100):
 
 func levelup():
 	get_tree().paused = true
-	enemySpawner.reset_spawned()
+	#enemySpawner.reset_spawned()
 	
 	sprite.play("dominance")
 	await get_tree().create_timer(0.5).timeout
@@ -377,5 +400,4 @@ func get_random_item():
 	else:
 		return null
   
-  enemySpawner.is_spawning = true
-
+	enemySpawner.is_spawning = true
