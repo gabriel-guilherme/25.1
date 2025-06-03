@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://diwkfw8c42ti5"]
+
+[ext_resource type="Texture2D" uid="uid://b7f1fpl8ykqvm" path="res://Sprites/Gorilla_felt.png" id="1_2yavq"]
+[ext_resource type="Script" uid="uid://bo2o4dg6c3odp" path="res://GUI/DeathScreen/button_2.gd" id="2_2yavq"]
+[ext_resource type="Script" uid="uid://i5dfknl5njku" path="res://GUI/DeathScreen/button.gd" id="2_vdgto"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2yavq")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 34.0
+offset_right = 399.0
+offset_bottom = 103.0
+theme_override_colors/font_color = Color(0.762476, 2.5028e-06, 6.73831e-07, 1)
+theme_override_font_sizes/font_size = 25
+text = "Monkey was defeated!"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.022
+offset_left = 34.0
+offset_top = 114.0
+offset_right = 189.0
+offset_bottom = 156.08
+text = "Monkey re-try"
+script = ExtResource("2_vdgto")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 183.0
+offset_right = 189.0
+offset_bottom = 233.0
+text = "Monkey give up"
+script = ExtResource("2_2yavq")
