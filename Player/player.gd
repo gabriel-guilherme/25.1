@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var movement_speed = 40.0
+@export var movement_speed = 200.0
 @export var hp = 80
 var maxHp = 80
 var attack_cooldown = 0
@@ -72,11 +72,14 @@ var spell_size = 0
 
 #enemy spawner
 @onready var enemySpawner = get_node("/root/World/EnemySpawner")
+@onready var health_bar = get_node("%HealthBar")
 
+var wave = 1
 
 func _ready():
+	update_health_bar()
 	attack()
-	set_expbar(experience, calculate_experiencecap())
+	#set_expbar(experience, calculate_experiencecap())
 
 func _physics_process(_delta):
 	#if enemySpawner.enemy_defeated >= enemySpawner.max_enemy_per_wave:
@@ -205,8 +208,14 @@ func _on_enemy_detection_2_body_exited(body: Node2D):
 		enemy_close_punch.erase(body)
 
 # ========== DAMAGE ==========
+func update_health_bar():
+	if health_bar:
+		health_bar.max_value = maxHp
+		health_bar.value = hp
+
 func _on_hurt_box_hurt(damage: Variant, _angle, _knockback):
 	hp -= clamp(damage - armor, 1.0, 999.0)
+	update_health_bar()
 	print(hp)
 	
 	if hp <= 0:
@@ -253,23 +262,26 @@ func calculate_experience(gem_exp):
 	else:
 		experience += collected_experience
 		collected_experience = 0
-	set_expbar(experience, exp_required)
+	#set_expbar(experience, exp_required)
 
 func calculate_experiencecap():
 	var exp_cap = experience_level
 	if experience_level < 20:
 		exp_cap = experience_level * 5
 	elif experience_level < 40:
-		exp_cap + 95 * (experience_level-19)*8
+		exp_cap = 95 * (experience_level-19)*8
 	else:
 		exp_cap = 255 + (experience_level-39)*12
 	
 	return exp_cap
 
-func set_expbar(set_value = 1, set_max_value = 100):
-	expBar.value = set_value
-	expBar.max_value = set_max_value
-
+#func set_expbar(set_value = 1, set_max_value = 100):
+#	expBar.value = set_value
+#	expBar.max_value = set_max_value
+func update_wave_progress(derrotados: int):
+	expBar.value = derrotados
+	expBar.max_value = 25
+	
 func levelup():
 	get_tree().paused = true
 	#enemySpawner.reset_spawned()
@@ -278,7 +290,8 @@ func levelup():
 	await get_tree().create_timer(0.5).timeout
 	
 	soundLevelUp.play()
-	lbLevel.text = str("Level: ", experience_level)
+	wave += 1
+	lbLevel.text = str("Wave: ", wave)
 	var tween = levelPanel.create_tween()
 	tween.tween_property(levelPanel, "position", Vector2(220, 50), 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
@@ -400,3 +413,10 @@ func get_random_item():
 		return randomitem
 	else:
 		return null
+
+  
+	enemySpawner.is_spawning = true
+
+
+
+

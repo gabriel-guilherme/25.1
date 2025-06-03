@@ -15,7 +15,7 @@ func _on_timer_timeout() -> void:
 	time += 1
 	if not is_spawning or spawns.is_empty():
 		return
-	
+
 	var wave_info = spawns[current_wave]
 
 	if time < wave_info.time_start or time > wave_info.time_end:
@@ -26,40 +26,62 @@ func _on_timer_timeout() -> void:
 	else:
 		wave_info.spawn_delay_counter = 0
 		var counter = 0
-		while counter < wave_info.enemy_num and enemy_spawned < max_enemy_per_wave:
+		while counter < max_enemy_per_wave and enemy_spawned < max_enemy_per_wave:
 			var enemy_instance = wave_info.enemy.instantiate()
 			enemy_instance.global_position = get_random_position()
+
+			# Aplica modificadores
+			if enemy_instance.has_method("apply_modifiers"):
+				enemy_instance.apply_modifiers(
+					wave_info.health_multiplier,
+					wave_info.speed_multiplier,
+					wave_info.damage_multiplier
+				)
+
 			add_child(enemy_instance)
 			enemy_spawned += 1
 			counter += 1
 			print("Spawnou inimigo #%d na wave %d" % [enemy_spawned, current_wave])
-		
+
 		if enemy_spawned >= max_enemy_per_wave:
 			is_spawning = false
-
 
 func increase_defeated():
 	if enemy_spawned == 0:
 		return
 
 	enemy_defeated += 1
-	print("Derrotados: %d" % enemy_defeated)
+	print("Derrotados: %d de %d" % [enemy_defeated, enemy_spawned])
+	player.update_wave_progress(enemy_defeated)
 
-	if enemy_defeated >= enemy_spawned:
-		# Resetar contadores
+	if enemy_defeated >= max_enemy_per_wave:
 		enemy_spawned = 0
 		enemy_defeated = 0
 		is_spawning = true
+		player.update_wave_progress(0)
+
 		player.levelup()
 
-		# Avançar para a próxima wave
+		# Aumenta progressão
+		var wave_info = spawns[current_wave]
+		wave_info.health_multiplier += 0.2
+		wave_info.speed_multiplier += 0.1
+		wave_info.damage_multiplier += 0.15
+
+		print("Wave %d - HP x%.2f | SPD x%.2f | DMG x%.2f" % [
+			current_wave,
+			wave_info.health_multiplier,
+			wave_info.speed_multiplier,
+			wave_info.damage_multiplier
+		])
+
+		# Avança para a próxima wave
 		current_wave += 1
 		if current_wave >= spawns.size():
-			current_wave = 0  # Loop infinito
+			current_wave = 0
 
 		spawns[current_wave].reset()
 		print("Nova wave: %d" % current_wave)
-
 
 func get_random_position() -> Vector2:
 	var vpr = get_viewport_rect().size * randf_range(1.1, 1.4)

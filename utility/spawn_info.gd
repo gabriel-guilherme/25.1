@@ -1,14 +1,16 @@
+class_name Spawn_info
 extends Resource
 
-class_name Spawn_info
-
+@export var enemy: PackedScene
 @export var time_start: int
 @export var time_end: int
-@export var enemy: Resource
-@export var enemy_num: int
 @export var enemy_spawn_delay: int
+var spawn_delay_counter: int = 0
 
-var spawn_delay_counter = 0
+# Multiplicadores de progressão
+var health_multiplier: float = 1.0
+var speed_multiplier: float = 1.0
+var damage_multiplier: float = 1.0
 
 func reset():
 	spawn_delay_counter = 0
