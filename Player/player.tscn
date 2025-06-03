@@ -263,9 +263,7 @@ collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_4ntmi")
 movement_speed = 100.0
-banana_attackspeed = 0.1
 punch_attackspeed = 2.0
-banana_orbit_level = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
@@ -298,7 +296,6 @@ shape = SubResource("CircleShape2D_btcbx")
 
 [node name="BananaTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
-wait_time = 10.0
 
 [node name="BananaAttachTimer" type="Timer" parent="Attack/BananaTimer"]
 unique_name_in_owner = true

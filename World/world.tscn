@@ -7,12 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://c02suxnugg8bc" path="res://Enemy/enemy.tscn" id="6_bkhv4"]
 [ext_resource type="PackedScene" uid="uid://u0iijug1krld" path="res://Item/ExperienceGem/experience_gem.tscn" id="7_yf0ba"]
 
-[sub_resource type="Resource" id="Resource_yf0ba"]
+[sub_resource type="Resource" id="Resource_k8do8"]
 script = ExtResource("5_k8do8")
 time_start = 0
-time_end = 60
+time_end = 999
 enemy = ExtResource("6_bkhv4")
-enemy_num = 25
+enemy_num = 10
 enemy_spawn_delay = 1
 metadata/_custom_type_script = "uid://cejccdt7ra3gx"
 
@@ -27,10 +27,9 @@ region_enabled = true
 region_rect = Rect2(0, 0, 80000, 80000)
 
 [node name="Player" parent="." instance=ExtResource("2_8a836")]
-banana_attackspeed = 1.5
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_k8do8")]
-spawns = Array[ExtResource("5_k8do8")]([SubResource("Resource_yf0ba")])
+spawns = Array[ExtResource("5_k8do8")]([SubResource("Resource_k8do8")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
