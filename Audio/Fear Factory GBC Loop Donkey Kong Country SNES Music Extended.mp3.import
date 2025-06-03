@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://oqwok7xyftqi"
+path="res://.godot/imported/Fear Factory GBC Loop Donkey Kong Country SNES Music Extended.mp3-9ca2e0fb0fcb0c8c28e20f14fce1ed95.mp3str"
+
+[deps]
+
+source_file="res://Audio/Fear Factory GBC Loop Donkey Kong Country SNES Music Extended.mp3"
+dest_files=["res://.godot/imported/Fear Factory GBC Loop Donkey Kong Country SNES Music Extended.mp3-9ca2e0fb0fcb0c8c28e20f14fce1ed95.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

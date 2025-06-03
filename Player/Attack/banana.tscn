@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://7pocvt6hqtp6"]
 
 [ext_resource type="Script" uid="uid://18ceed1xxhbt" path="res://Player/Attack/banana.gd" id="1_0wm3u"]
-[ext_resource type="Texture2D" uid="uid://bxxvt5a60ptub" path="res://Sprites/fruit_banana.png" id="2_glvi0"]
+[ext_resource type="Texture2D" uid="uid://fdaw30wldixw" path="res://Item/Weapons/poop.png" id="2_glvi0"]
 [ext_resource type="AudioStream" uid="uid://bhdggr7q7frn5" path="res://Audio/199823_connersaw64_egg-shaker-1-throw (online-audio-converter.com).mp3" id="3_glvi0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qbgg8"]
-size = Vector2(27, 15)
+size = Vector2(15, 15)
 
 [node name="Banana" type="Area2D" groups=["attack"]]
 top_level = true
@@ -14,11 +14,11 @@ collision_mask = 4
 script = ExtResource("1_0wm3u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.5)
+position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_qbgg8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.06, 0.06)
 texture = ExtResource("2_glvi0")
 
 [node name="Timer" type="Timer" parent="."]
@@ -28,7 +28,7 @@ autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_glvi0")
-volume_db = -10.0
+volume_db = -30.0
 pitch_scale = 1.5
 autoplay = true
 

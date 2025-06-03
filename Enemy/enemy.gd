@@ -50,10 +50,19 @@ func slow(duration, power):
 	await get_tree().create_timer(duration).timeout
 	movement_speed = old_movespeed
 
+var life_gem = preload("res://Item/LifeGem/life_gem.tscn")
+
 func death():
 	if is_dead:
 		return
 	is_dead = true
+
+	# Spawna gem de vida com 10% de chance
+	if randi() % 10 == 0:
+		var life = life_gem.instantiate()
+		life.global_position = global_position
+		loot_base.call_deferred("add_child", life)
+
 	enemySpawner.increase_defeated()
 	movement_speed = 0
 	sprite.play("disappear")
@@ -75,7 +84,7 @@ func _on_hurt_box_hurt(damage: int, angle: Vector2, knockback_amount: float) -> 
 	else:
 		sound_hit.play()
 
-# 🆕 Recebe multiplicadores do WaveManager
+#  Recebe multiplicadores do WaveManager
 func apply_modifiers(h_mul: float, s_mul: float, d_mul: float):
 	hp = int(base_hp * h_mul)
 	movement_speed = base_movement_speed * s_mul

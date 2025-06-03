@@ -1,7 +1,8 @@
 extends Node2D
 
 @export var spawns: Array[Spawn_info] = []
-@export var max_enemy_per_wave = 25
+@export var base_max_enemy_per_wave = 1
+var max_enemy_per_wave = base_max_enemy_per_wave
 
 var current_wave = 0
 var enemy_spawned = 0
@@ -21,16 +22,18 @@ func _on_timer_timeout() -> void:
 	if time < wave_info.time_start or time > wave_info.time_end:
 		return
 
+	# Incrementa contador de delay
 	if wave_info.spawn_delay_counter < wave_info.enemy_spawn_delay:
 		wave_info.spawn_delay_counter += 1
 	else:
+		# Reset contador de delay
 		wave_info.spawn_delay_counter = 0
-		var counter = 0
-		while counter < max_enemy_per_wave and enemy_spawned < max_enemy_per_wave:
+
+		# Spawnar 1 inimigo por vez com delay
+		if enemy_spawned < max_enemy_per_wave:
 			var enemy_instance = wave_info.enemy.instantiate()
 			enemy_instance.global_position = get_random_position()
 
-			# Aplica modificadores
 			if enemy_instance.has_method("apply_modifiers"):
 				enemy_instance.apply_modifiers(
 					wave_info.health_multiplier,
@@ -40,9 +43,9 @@ func _on_timer_timeout() -> void:
 
 			add_child(enemy_instance)
 			enemy_spawned += 1
-			counter += 1
 			print("Spawnou inimigo #%d na wave %d" % [enemy_spawned, current_wave])
 
+		# Se já spawnou tudo, para de spawnar
 		if enemy_spawned >= max_enemy_per_wave:
 			is_spawning = false
 
@@ -62,26 +65,29 @@ func increase_defeated():
 
 		player.levelup()
 
-		# Aumenta progressão
 		var wave_info = spawns[current_wave]
 		wave_info.health_multiplier += 0.2
 		wave_info.speed_multiplier += 0.1
 		wave_info.damage_multiplier += 0.15
 
-		print("Wave %d - HP x%.2f | SPD x%.2f | DMG x%.2f" % [
+		# Aumenta o número máximo de inimigos na próxima wave
+		max_enemy_per_wave += 5  # pode ajustar esse incremento como quiser
+
+		print("Wave %d - HP x%.2f | SPD x%.2f | DMG x%.2f | Max Enemies: %d" % [
 			current_wave,
 			wave_info.health_multiplier,
 			wave_info.speed_multiplier,
-			wave_info.damage_multiplier
+			wave_info.damage_multiplier,
+			max_enemy_per_wave
 		])
 
-		# Avança para a próxima wave
 		current_wave += 1
 		if current_wave >= spawns.size():
 			current_wave = 0
 
 		spawns[current_wave].reset()
 		print("Nova wave: %d" % current_wave)
+
 
 func get_random_position() -> Vector2:
 	var vpr = get_viewport_rect().size * randf_range(1.1, 1.4)

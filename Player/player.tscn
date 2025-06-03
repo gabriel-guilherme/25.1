@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=3 uid="uid://ce0beuw32mvxg"]
+[gd_scene load_steps=44 format=3 uid="uid://ce0beuw32mvxg"]
 
 [ext_resource type="Script" uid="uid://istvry58nuqu" path="res://Player/player.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://c5nvj13dubrwn" path="res://Sprites/gorilla sprite sheet 256x256.png" id="2_fhl08"]
 [ext_resource type="PackedScene" uid="uid://pxp17un6p6y7" path="res://utility/HurtBox/hurt_box.tscn" id="3_btcbx"]
 [ext_resource type="Texture2D" uid="uid://cmwx2oi20bjcn" path="res://Sprites/GUI/exp_background.png" id="4_k53q1"]
 [ext_resource type="Texture2D" uid="uid://dowfwf3vwb4q5" path="res://Sprites/GUI/exp_progress.png" id="5_fhl08"]
+[ext_resource type="AudioStream" uid="uid://dr5um1773nxho" path="res://Audio/gorila_scream.wav" id="6_fhl08"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
 atlas = ExtResource("2_fhl08")
@@ -265,7 +266,7 @@ collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_4ntmi")
-movement_speed = 100.0
+banana_attackspeed = 0.1
 punch_attackspeed = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -411,6 +412,11 @@ offset_right = 640.0
 offset_bottom = 360.0
 theme_override_font_sizes/font_size = 10
 theme_override_styles/fill = SubResource("StyleBoxFlat_k53q1")
+
+[node name="levelup_sound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("6_fhl08")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/BananaTimer" to="." method="_on_banana_timer_timeout"]

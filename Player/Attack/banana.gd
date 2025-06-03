@@ -18,7 +18,7 @@ signal remove_from_array(object)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	angle = global_position.direction_to(target)
-	rotation = angle.angle() + deg_to_rad(135)
+	rotation = angle.angle() + deg_to_rad(100)
 	match level:
 		1:
 			hp = 1

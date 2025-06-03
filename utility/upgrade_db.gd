@@ -5,32 +5,32 @@ const WEAPON_PATH = "res://Item/Weapons/"
 
 const UPGRADES = {
 	"banana1": {
-		"icon": WEAPON_PATH + "banana.png",
-		"displayname": "Banana",
-		"details": "Duas bananas agora, quem poderia se machucar com isso?",
+		"icon": WEAPON_PATH + "poop.png",
+		"displayname": "Cocô",
+		"details": "Duas vezes mais fedido",
 		"level": "Level: 1",
 		"prerequesite": [],
 		"type": "weapon"
 	},
 	"banana2": {
-		"icon": WEAPON_PATH + "banana.png",
-		"displayname": "Banana",
-		"details": "",
+		"icon": WEAPON_PATH + "poop.png",
+		"displayname": "Cocô",
+		"details": "Consistência mais aerodinâmica que dá propriedades de velocidade e um impacto avassalador, arremessando os inimigos para longe.",
 		"level": "Level: 2",
 		"prerequesite": ["banana1"],
 		"type": "weapon"
 	},
 	"banana3": {
-		"icon": WEAPON_PATH + "banana.png",
-		"displayname": "Banana",
-		"details": "",
+		"icon": WEAPON_PATH + "poop.png",
+		"displayname": "Cocô",
+		"details": "É maior, É melhor",
 		"level": "Level: 3",
 		"prerequesite": ["banana2"],
 		"type": "weapon"
 	},
 	"banana4": {
-		"icon": WEAPON_PATH + "banana.png",
-		"displayname": "Banana",
+		"icon": WEAPON_PATH + "poop.png",
+		"displayname": "Cocô",
 		"details": "",
 		"level": "Level: 4",
 		"prerequesite": ["banana3"],
