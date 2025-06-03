@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
-@export var movement_speed = 200.0
+@export var movement_speed = 30.0
 @export var hp = 80
 var maxHp = 80
 var attack_cooldown = 0
 var attack_size = 0
 @onready var sprite = $AnimatedSprite2D
+
 
 var experience = 0
 var experience_level = 1
@@ -55,7 +56,7 @@ var enemy_close_punch = []
 @onready var levelPanel = get_node("%LevelUp")
 @onready var upgradeOptions = get_node("%UpgradeOptions")
 @onready var itemOptions = preload("res://utility/item_option.tscn")
-@onready var soundLevelUp = get_node("%sound_levelup")
+@onready var soundLevelUp = get_node("%levelup_sound")
 
 #
 #@onready var gameOverScreen = get_node("/root/World/GameOverScreen")
@@ -221,10 +222,16 @@ func _on_hurt_box_hurt(damage: Variant, _angle, _knockback):
 	if hp <= 0:
 		die()
 
+func _change_to_death_scene():
+	get_tree().change_scene_to_file("res://GUI/DeathScreen/death_screen.tscn")
 
 func die():
-	# get_tree().paused = true
-	get_tree().change_scene_to_file("res://GUI/DeathScreen/death_screen.tscn")
+	call_deferred("_change_to_death_scene")
+	#get_tree().paused = true
+	#gameOverScreen.visible = true
+
+	#restartButton.pressed.connect(restart_game)
+	#mainMenuButton.pressed.connect(go_to_menu)
 
 func restart_game():
 	get_tree().paused = false
@@ -241,8 +248,10 @@ func _on_grab_area_area_entered(area: Area2D) -> void:
 
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
-		var gem_exp = area.collect()
-		calculate_experience(gem_exp)
+		hp += area.collect()
+		hp = clamp(hp, 0, maxHp)
+		update_health_bar()
+		#calculate_experience(gem_exp)
 
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
@@ -282,6 +291,7 @@ func update_wave_progress(derrotados: int):
 func levelup():
 	get_tree().paused = true
 	#enemySpawner.reset_spawned()
+	
 	
 	sprite.play("dominance")
 	await get_tree().create_timer(0.5).timeout
@@ -334,7 +344,7 @@ func upgrade_character(upgrade):
 
 		# Banana peel
 		"banana_peel1":
-			print("aBABAwd")
+			#print("aBABAwd")
 			banana_peel_level = 1
 		"banana_peel2":
 			banana_peel_level = 2
@@ -361,6 +371,7 @@ func upgrade_character(upgrade):
 		"medic_kit":
 			hp += 20
 			hp = clamp(hp, 0, maxHp)
+			update_health_bar()
 		"coffee1", "coffee2", "coffee3", "coffee4":
 			attack_cooldown += 0.05
 		"apple1", "apple2", "apple3", "apple4":

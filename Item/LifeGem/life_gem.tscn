@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy08hqpgdh5qp"]
+
+[ext_resource type="Script" uid="uid://bhyrp6rbt4601" path="res://Item/LifeGem/life_gem.gd" id="1_fork2"]
+[ext_resource type="Texture2D" uid="uid://d3sp3dhwhopxf" path="res://Sprites/items/Gem_green.png" id="2_7y5x7"]
+[ext_resource type="AudioStream" uid="uid://c5sluva1bnwwo" path="res://Audio/166184__drminky__retro-coin-collect.wav" id="3_7y5x7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_80jh8"]
+radius = 11.0454
+
+[node name="life_gem" type="Area2D" groups=["loot"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_fork2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_80jh8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_7y5x7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7y5x7")
