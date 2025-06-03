@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6ebyvxpxrgv"]
+
+[ext_resource type="Script" uid="uid://bbyppbrwqhh83" path="res://Start/start.gd" id="1_j0ik2"]
+[ext_resource type="Texture2D" uid="uid://c2rnhpavvq7ui" path="res://Sprites/banner gorila.png" id="1_j57vf"]
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j0ik2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_j57vf")
+expand_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "25.1: Mens x Gorilla"
+
+[node name="CreditLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "credito"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Jogar
+"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sair"
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
