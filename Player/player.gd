@@ -393,11 +393,10 @@ func get_random_item():
 					dblist.append(i)
 		else:
 			dblist.append(i)
+	enemySpawner.is_spawning = true
 	if dblist.size() > 0:
 		var randomitem = dblist.pick_random()
 		upgrade_options.append(randomitem)
 		return randomitem
 	else:
 		return null
-  
-	enemySpawner.is_spawning = true

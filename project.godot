@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="25.1"
-run/main_scene="uid://dik8vc2i4kvim"
+run/main_scene="uid://b6ebyvxpxrgv"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 UpgradeDb="*res://utility/upgrade_db.tscn"
+BgMusic="*res://Start/bg_music.tscn"
 
 [display]
 

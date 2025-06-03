@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn8i142o7fhh1"]
+
+[ext_resource type="AudioStream" uid="uid://boge3thulit1t" path="res://Audio/chill_jungle_ambient.mp3" id="1_y5pa1"]
+
+[node name="BgMusic" type="Node2D"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_y5pa1")
+volume_db = -29.744
+autoplay = true
