@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c7iluf5wxi8wt" path="res://Sprites/ChatGPT Image 1 de jun. de 2025, 16_41_26.png" id="2_4jhp4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6clmh"]
-size = Vector2(26, 19)
+size = Vector2(31, 19)
 
 [node name="Punch" type="Area2D" groups=["attack"]]
 top_level = true
@@ -14,7 +14,7 @@ script = ExtResource("1_0fq4t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
-position = Vector2(0, 0.5)
+position = Vector2(-2.5, 0.5)
 shape = SubResource("RectangleShape2D_6clmh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -249,7 +249,6 @@ collision_layer = 4
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_px1sc")
-movement_speed = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

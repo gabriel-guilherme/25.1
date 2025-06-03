@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var movement_speed = 30.0
+@export var movement_speed = 60.0
 @export var hp = 80
 var maxHp = 80
 var attack_cooldown = 0
@@ -231,11 +231,11 @@ func _on_hurt_box_hurt(damage: Variant, _angle, _knockback):
 	if hp <= 0:
 		die()
 
-func _change_to_death_scene():
-	get_tree().change_scene_to_file("res://GUI/DeathScreen/death_screen.tscn")
+#func _change_to_death_scene():
+#	get_tree().change_scene_to_file("res://GUI/DeathScreen/death_screen.tscn")
 
 func die():
-	call_deferred("_change_to_death_scene")
+	get_parent().call_deferred("game_over")
 	#get_tree().paused = true
 	#gameOverScreen.visible = true
 

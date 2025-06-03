@@ -69,7 +69,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"banana_orbit1":{
-		"icon": WEAPON_PATH + "banana.png",
+		"icon": WEAPON_PATH + "Sprite-0001.png",
 		"displayname": "Banana Orbit",
 		"details": "Bananas ao seu redor = proteção garantida",
 		"level": "Level: 1",
@@ -101,7 +101,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"banana_peel1":{
-		"icon": WEAPON_PATH + "banana_peel.png",
+		"icon": WEAPON_PATH + "bananaPeel.png",
 		"displayname": "Banana Peel",
 		"details": "Extraindo 100% do potencial de uma banana",
 		"level": "Level: 1",
@@ -109,7 +109,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"banana_peel2":{
-		"icon": WEAPON_PATH + "banana_peel.png",
+		"icon": WEAPON_PATH + "bananaPeel.png",
 		"displayname": "Banana Peel",
 		"details": "Sua fome aumenta e seu armamento também",
 		"level": "Level: 2",
@@ -117,7 +117,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"banana_peel3":{
-		"icon": WEAPON_PATH + "banana_peel.png",
+		"icon": WEAPON_PATH + "bananaPeel.png",
 		"displayname": "Banana Peel",
 		"details": "Sua saliva fica arraigada na banana garantindo uma maior lentidão",
 		"level": "Level: 3",
@@ -125,7 +125,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"banana_peel4":{
-		"icon": WEAPON_PATH + "banana_peel.png",
+		"icon": WEAPON_PATH + "bananaPeel.png",
 		"displayname": "Banana Peel",
 		"details": "Lentidão extrema",
 		"level": "Level: 4",

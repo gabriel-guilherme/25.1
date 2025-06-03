@@ -266,7 +266,6 @@ collision_layer = 2
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_4ntmi")
-movement_speed = 20.0
 banana_attackspeed = 1.5
 punch_attackspeed = 2.0
 

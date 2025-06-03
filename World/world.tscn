@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dik8vc2i4kvim"]
 
-[ext_resource type="Texture2D" uid="uid://v7nk3k66bvh8" path="res://Sprites/Texture_1_Diffuse.png" id="1_62w18"]
 [ext_resource type="Script" uid="uid://bbr35ij6hl72w" path="res://World/world.gd" id="1_eidgh"]
 [ext_resource type="PackedScene" uid="uid://ce0beuw32mvxg" path="res://Player/player.tscn" id="2_8a836"]
+[ext_resource type="Texture2D" uid="uid://b76sae3cqeevh" path="res://World/Sprite-0004.png" id="2_yf0ba"]
 [ext_resource type="PackedScene" uid="uid://dnoswy272fvvk" path="res://Enemy_Spawner/enemy_spawner.tscn" id="4_k8do8"]
 [ext_resource type="Script" uid="uid://cejccdt7ra3gx" path="res://utility/spawn_info.gd" id="5_k8do8"]
 [ext_resource type="PackedScene" uid="uid://c02suxnugg8bc" path="res://Enemy/enemy.tscn" id="6_bkhv4"]
@@ -22,8 +22,7 @@ script = ExtResource("1_eidgh")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_repeat = 2
 position = Vector2(1, 0)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_62w18")
+texture = ExtResource("2_yf0ba")
 region_enabled = true
 region_rect = Rect2(0, 0, 80000, 80000)
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxgdvfa1j8yxp"]
 
 [ext_resource type="Script" uid="uid://ds1g7a4p5wtok" path="res://Player/BananaPeel/banana_peel.gd" id="1_6reuj"]
-[ext_resource type="Texture2D" uid="uid://q1q7qqd20ktm" path="res://Sprites/clipart3098975.png" id="1_jt1wc"]
+[ext_resource type="Texture2D" uid="uid://xjnsl8o5xsmo" path="res://Player/BananaPeel/bananaPeel.png" id="2_6reuj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6reuj"]
-size = Vector2(42, 27)
+size = Vector2(36, 27)
 
 [node name="BananaPeel" type="Area2D" groups=["attack"]]
 collision_layer = 5
@@ -12,11 +12,10 @@ collision_mask = 5
 script = ExtResource("1_6reuj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("1_jt1wc")
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("2_6reuj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_6reuj")
 
 [node name="Timer" type="Timer" parent="."]
