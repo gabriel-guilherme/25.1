@@ -223,11 +223,8 @@ func _on_hurt_box_hurt(damage: Variant, _angle, _knockback):
 
 
 func die():
-	get_tree().paused = true
-	#gameOverScreen.visible = true
-
-	#restartButton.pressed.connect(restart_game)
-	#mainMenuButton.pressed.connect(go_to_menu)
+	# get_tree().paused = true
+	get_tree().change_scene_to_file("res://GUI/DeathScreen/death_screen.tscn")
 
 func restart_game():
 	get_tree().paused = false
@@ -416,7 +413,3 @@ func get_random_item():
 
   
 	enemySpawner.is_spawning = true
-
-
-
-
