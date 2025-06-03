@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 
 @onready var lblName = $label_name
 @onready var lblDesc = $label_desc
