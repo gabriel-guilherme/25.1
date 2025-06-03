@@ -1,16 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://qo6v04ba08kg"]
+[gd_scene load_steps=5 format=3 uid="uid://qo6v04ba08kg"]
 
 [ext_resource type="Script" uid="uid://c8f4v7ambhb7s" path="res://utility/item_option.gd" id="1_mv6x1"]
 [ext_resource type="Texture2D" uid="uid://bxxvt5a60ptub" path="res://Sprites/fruit_banana.png" id="1_ryhir"]
 
-[node name="ItemOption" type="ColorRect"]
-custom_minimum_size = Vector2(180, 50)
+[sub_resource type="Gradient" id="Gradient_mv6x1"]
+colors = PackedColorArray(0.0196078, 0.203922, 0.219608, 1, 0.0235294, 0.427451, 0.25098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4f4pk"]
+gradient = SubResource("Gradient_mv6x1")
+
+[node name="ItemOption" type="TextureRect"]
+custom_minimum_size = Vector2(200, 60)
 anchors_preset = -1
 anchor_right = 0.281
 anchor_bottom = 0.139
-offset_right = 0.159988
-offset_bottom = -0.0400047
-color = Color(0.329158, 0.329158, 0.329158, 1)
+offset_right = 20.16
+offset_bottom = 9.96
+texture = SubResource("GradientTexture2D_4f4pk")
+flip_h = true
 script = ExtResource("1_mv6x1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -19,7 +26,7 @@ offset_left = 2.0
 offset_top = 2.0
 offset_right = 26.0
 offset_bottom = 26.0
-color = Color(0, 0, 0, 1)
+color = Color(0.0474884, 0.142853, 0.172485, 1)
 
 [node name="ItemIcon" type="TextureRect" parent="ColorRect"]
 layout_mode = 0
@@ -29,6 +36,7 @@ offset_right = 287.0
 offset_bottom = 253.0
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("1_ryhir")
+expand_mode = 2
 
 [node name="label_name" type="Label" parent="."]
 layout_mode = 0
@@ -51,10 +59,10 @@ autowrap_mode = 3
 
 [node name="label_level" type="Label" parent="."]
 layout_mode = 0
-offset_left = 130.0
-offset_top = 3.0
-offset_right = 174.0
-offset_bottom = 26.0
+offset_left = 152.0
+offset_top = 5.0
+offset_right = 196.0
+offset_bottom = 28.0
 theme_override_font_sizes/font_size = 12
 text = "Level: 1"
 
