@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dnoswy272fvvk" path="res://Enemy_Spawner/enemy_spawner.tscn" id="4_k8do8"]
 [ext_resource type="Script" uid="uid://cejccdt7ra3gx" path="res://utility/spawn_info.gd" id="5_k8do8"]
 [ext_resource type="PackedScene" uid="uid://c02suxnugg8bc" path="res://Enemy/enemy.tscn" id="6_bkhv4"]
-[ext_resource type="AudioStream" uid="uid://oqwok7xyftqi" path="res://Audio/Fear Factory GBC Loop Donkey Kong Country SNES Music Extended.mp3" id="8_oe8m4"]
+[ext_resource type="AudioStream" uid="uid://i0qolg07qytx" path="res://Audio/background audio.mp3" id="7_yf0ba"]
 
 [sub_resource type="Resource" id="Resource_k8do8"]
 script = ExtResource("5_k8do8")
@@ -35,6 +35,5 @@ spawns = Array[ExtResource("5_k8do8")]([SubResource("Resource_k8do8")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
-stream = ExtResource("8_oe8m4")
+stream = ExtResource("7_yf0ba")
 volume_db = -10.0
-autoplay = true

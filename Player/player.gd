@@ -362,10 +362,13 @@ func upgrade_character(upgrade):
 		# Banana orbit
 		"banana_orbit1":
 			banana_orbit_level = 1
+			has_spawned_orbit = false
 		"banana_orbit2":
 			banana_orbit_level = 2
+			has_spawned_orbit = false
 		"banana_orbit3":
 			banana_orbit_level = 3
+			has_spawned_orbit = false
 		"banana_orbit4":
 			banana_orbit_level = 4
 			has_spawned_orbit = false

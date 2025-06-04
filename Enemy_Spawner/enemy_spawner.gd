@@ -19,8 +19,8 @@ func _on_timer_timeout() -> void:
 
 	var wave_info = spawns[current_wave]
 
-	if time < wave_info.time_start or time > wave_info.time_end:
-		return
+	#if time < wave_info.time_start or time > wave_info.time_end:
+		#return
 
 	# Incrementa contador de delay
 	if wave_info.spawn_delay_counter < wave_info.enemy_spawn_delay:
@@ -30,20 +30,25 @@ func _on_timer_timeout() -> void:
 		wave_info.spawn_delay_counter = 0
 
 		# Spawnar 1 inimigo por vez com delay
-		if enemy_spawned < max_enemy_per_wave:
-			var enemy_instance = wave_info.enemy.instantiate()
-			enemy_instance.global_position = get_random_position()
+		var sp_count = 0
+		while sp_count < 5:
+			sp_count += 1
+		
+			if enemy_spawned < max_enemy_per_wave:
+				
+				var enemy_instance = wave_info.enemy.instantiate()
+				enemy_instance.global_position = get_random_position()
 
-			if enemy_instance.has_method("apply_modifiers"):
-				enemy_instance.apply_modifiers(
-					wave_info.health_multiplier,
-					wave_info.speed_multiplier,
-					wave_info.damage_multiplier
-				)
+				if enemy_instance.has_method("apply_modifiers"):
+					enemy_instance.apply_modifiers(
+						wave_info.health_multiplier,
+						wave_info.speed_multiplier,
+						wave_info.damage_multiplier
+					)
 
-			add_child(enemy_instance)
-			enemy_spawned += 1
-			print("Spawnou inimigo #%d na wave %d" % [enemy_spawned, current_wave])
+				add_child(enemy_instance)
+				enemy_spawned += 1
+				print("Spawnou inimigo #%d na wave %d" % [enemy_spawned, current_wave])
 
 		# Se já spawnou tudo, para de spawnar
 		if enemy_spawned >= max_enemy_per_wave:
@@ -66,9 +71,9 @@ func increase_defeated():
 		player.levelup()
 
 		var wave_info = spawns[current_wave]
-		wave_info.health_multiplier += 0.2
+		wave_info.health_multiplier += 0.
 		wave_info.speed_multiplier += 0.1
-		wave_info.damage_multiplier += 0.15
+		wave_info.damage_multiplier += 0.1
 
 		# Aumenta o número máximo de inimigos na próxima wave
 		max_enemy_per_wave += 5  # pode ajustar esse incremento como quiser

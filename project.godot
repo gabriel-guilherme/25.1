@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 UpgradeDb="*res://utility/upgrade_db.tscn"
-BgMusic="*res://Start/bg_music.tscn"
 
 [display]
 
