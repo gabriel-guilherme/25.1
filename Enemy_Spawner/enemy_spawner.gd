@@ -71,7 +71,7 @@ func increase_defeated():
 		player.levelup()
 
 		var wave_info = spawns[current_wave]
-		wave_info.health_multiplier += 0.
+		wave_info.health_multiplier += 0.3
 		wave_info.speed_multiplier += 0.1
 		wave_info.damage_multiplier += 0.1
 
