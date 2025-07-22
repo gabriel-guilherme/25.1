@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MetaProgression" load_steps=2 format=3 uid="uid://g5sfyqkdji0q"]
+
+[ext_resource type="Script" uid="uid://c8o2wt77lycih" path="res://utility/RogueLike/MetaProgression.gd" id="1_pymmw"]
+
+[resource]
+script = ExtResource("1_pymmw")
+bananas = 0
+permanent_health_level = 0
+permanent_speed_level = 0
+permanent_damage_level = 0
+metadata/_custom_type_script = "uid://c8o2wt77lycih"

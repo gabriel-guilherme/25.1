@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 UpgradeDb="*res://utility/upgrade_db.tscn"
 BgMusic="*res://Start/bg_music.tscn"
+GameData="*res://utility/RogueLike/GameData.gd"
 
 [display]
 

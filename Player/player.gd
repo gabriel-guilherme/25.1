@@ -6,6 +6,13 @@ var maxHp = 80
 var attack_cooldown = 0
 var attack_size = 0
 @onready var sprite = $AnimatedSprite2D
+var orbits = 1
+
+const HP_PER_UPGRADE = 10       # +10 de vida máxima por nível
+const SPEED_PER_UPGRADE = 5.0   # +5 de velocidade por nível
+const DAMAGE_PER_UPGRADE = 2.0
+
+var damage_bonus
 
 
 var experience = 0
@@ -44,7 +51,7 @@ var punch_baseammo = 0
 
 # Banana Orbit
 @export var banana_orbit_level = 0
-var has_spawned_orbit = false
+#var has_spawned_orbit = false
 
 # Enemies
 var enemy_close = []
@@ -78,9 +85,12 @@ var spell_size = 0
 var wave = 1
 
 func _ready():
+	apply_permanent_upgrades()
 	update_health_bar()
 	attack()
 	#set_expbar(experience, calculate_experiencecap())
+	if banana_orbit_level > 0:
+		update_banana_orbit()
 
 func _physics_process(_delta):
 	#if enemySpawner.enemy_defeated >= enemySpawner.max_enemy_per_wave:
@@ -108,6 +118,26 @@ func movement():
 	velocity = mov.normalized() * movement_speed
 	move_and_slide()
 
+func apply_permanent_upgrades():
+	# Carrega os dados do singleton (garante que estão atualizados)
+	GameData.load_data() 
+	
+	# Aplica o upgrade de vida
+	var hp_bonus = GameData.progression.permanent_health_level * HP_PER_UPGRADE
+	maxHp += hp_bonus
+	hp = maxHp # Começa a partida com vida cheia
+	print("Bônus de Vida Permanente: +%d" % hp_bonus)
+	
+	# Aplica o upgrade de velocidade
+	var speed_bonus = GameData.progression.permanent_speed_level * SPEED_PER_UPGRADE
+	movement_speed += speed_bonus
+	print("Bônus de Velocidade Permanente: +%f" % speed_bonus)
+	
+	# Aplica o upgrade de dano (exemplo: você precisará de uma var base_damage)
+	damage_bonus = GameData.progression.permanent_damage_level * DAMAGE_PER_UPGRADE
+	# print("Bônus de Dano Permanente: +%d" % damage_bonus)
+
+
 func attack():
 	if banana_level > 0:
 		bananaTimer.wait_time = banana_attackspeed * (1-attack_cooldown)
@@ -124,9 +154,9 @@ func attack():
 		if bananaPeelTimer.is_stopped():
 			bananaPeelTimer.start()
 
-	if banana_orbit_level > 0 and not has_spawned_orbit:
-		spawn_banana_orbit()
-		has_spawned_orbit = true
+	#if banana_orbit_level > 0 and not has_spawned_orbit:
+	#	spawn_banana_orbit()
+	#	has_spawned_orbit = true
 
 # ========== ATTACK LOGIC ==========
 
@@ -293,9 +323,9 @@ func calculate_experiencecap():
 #func set_expbar(set_value = 1, set_max_value = 100):
 #	expBar.value = set_value
 #	expBar.max_value = set_max_value
-func update_wave_progress(derrotados: int):
+func update_wave_progress(derrotados: int, total_inimigos_wave: int):
 	expBar.value = derrotados
-	expBar.max_value = 25
+	expBar.max_value = total_inimigos_wave
 	
 func levelup():
 	get_tree().paused = true
@@ -321,7 +351,19 @@ func levelup():
 		options += 1
 	
 
+func update_banana_orbit():
+	for banana in get_tree().get_nodes_in_group("banana_orbit_instance"):
+		banana.queue_free()
+	
+	
+	if orbits == 2:
+		banana_orbit_level = 2
+		spawn_banana_orbit()
+		banana_orbit_level = 4
+	spawn_banana_orbit()
+
 func upgrade_character(upgrade):
+	var needs_orbit_update = false
 	match upgrade:
 		# Banana throw
 		"banana1":
@@ -331,9 +373,11 @@ func upgrade_character(upgrade):
 			banana_level = 2
 		"banana3":
 			banana_level = 3
+
 		"banana4":
 			banana_level = 4
 			banana_baseammo += 2
+			
 		
 		# Punch
 		"punch1":
@@ -362,13 +406,18 @@ func upgrade_character(upgrade):
 		# Banana orbit
 		"banana_orbit1":
 			banana_orbit_level = 1
+			needs_orbit_update = true
 		"banana_orbit2":
 			banana_orbit_level = 2
+			needs_orbit_update = true
 		"banana_orbit3":
 			banana_orbit_level = 3
+			needs_orbit_update = true
 		"banana_orbit4":
 			banana_orbit_level = 4
-			has_spawned_orbit = false
+			needs_orbit_update = true
+			orbits = 2
+			#has_spawned_orbit = false
 
 		# Outros upgrades
 		"medic_kit":
@@ -383,7 +432,8 @@ func upgrade_character(upgrade):
 			attack_size += 0.10
 		"fur1", "fur2", "fur3", "fur4":
 			armor += 1
-	
+	if needs_orbit_update:
+		update_banana_orbit()
 	
 	
 	

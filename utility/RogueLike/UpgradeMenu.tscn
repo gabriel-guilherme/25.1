@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcbv4cvggpbjj"]
+
+[ext_resource type="Script" uid="uid://bagvinvx4bhlp" path="res://utility/RogueLike/upgrade_menu.gd" id="1_6v7y7"]
+[ext_resource type="Texture2D" uid="uid://cxb7wjid70k1i" path="res://Sprites/Gorila Triunfante na Selva.png" id="2_6v7y7"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6v7y7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6v7y7")
+expand_mode = 2
+
+[node name="bananas_label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 39.0
+offset_top = 27.0
+offset_right = 404.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(1, 0.921569, 0, 1)
+theme_override_font_sizes/font_size = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = -28.0
+offset_right = 214.0
+offset_bottom = 204.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.96)
+alignment = 1
+
+[node name="Speed" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="spd_desc_label" type="Label" parent="VBoxContainer/Speed"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Velocidade de movimento"
+
+[node name="spd_cost_label" type="Label" parent="VBoxContainer/Speed"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="spd_button" type="Button" parent="VBoxContainer/Speed"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "BUY"
+
+[node name="Damage" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="dmg_desc_label" type="Label" parent="VBoxContainer/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Dano de projetil"
+
+[node name="dmg_cost_label" type="Label" parent="VBoxContainer/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="dmg_button" type="Button" parent="VBoxContainer/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "BUY"
+
+[node name="Health" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="hp_desc_label" type="Label" parent="VBoxContainer/Health"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Vida maxima"
+
+[node name="hp_cost_label" type="Label" parent="VBoxContainer/Health"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="hp_button" type="Button" parent="VBoxContainer/Health"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "BUY"
+
+[node name="back_button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 41.0
+offset_top = 306.0
+offset_right = 128.0
+offset_bottom = 337.0
+text = "Return"
+
+[connection signal="pressed" from="VBoxContainer/Speed/spd_button" to="." method="_on_spd_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Damage/dmg_button" to="." method="_on_dmg_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Health/hp_button" to="." method="_on_hp_button_pressed"]
+[connection signal="pressed" from="back_button" to="." method="_on_back_button_pressed"]

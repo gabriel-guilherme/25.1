@@ -1,16 +1,18 @@
 extends Node2D
 
 @export var spawns: Array[Spawn_info] = []
-@export var base_max_enemy_per_wave = 25
+@export var base_max_enemy_per_wave = 5
 var max_enemy_per_wave = base_max_enemy_per_wave
 
 var current_wave = 0
+var completed_waves = 0
 var enemy_spawned = 0
 var enemy_defeated = 0
 var is_spawning = true
 var time = 0
 
 @onready var player = get_tree().get_first_node_in_group("player")
+
 
 func _on_timer_timeout() -> void:
 	time += 1
@@ -29,8 +31,13 @@ func _on_timer_timeout() -> void:
 		# Reset contador de delay
 		wave_info.spawn_delay_counter = 0
 
-		# Spawnar 1 inimigo por vez com delay
-		if enemy_spawned < max_enemy_per_wave:
+		# --- BLOCO MODIFICADO ---
+		# Spawnar uma "rajada" (burst) de inimigos de uma vez
+		for i in range(wave_info.enemies_per_burst):
+			# Para de spawnar se atingir o máximo da wave
+			if enemy_spawned >= max_enemy_per_wave:
+				break # Interrompe o loop 'for'
+
 			var enemy_instance = wave_info.enemy.instantiate()
 			enemy_instance.global_position = get_random_position()
 
@@ -44,10 +51,12 @@ func _on_timer_timeout() -> void:
 			add_child(enemy_instance)
 			enemy_spawned += 1
 			print("Spawnou inimigo #%d na wave %d" % [enemy_spawned, current_wave])
+		# --- FIM DO BLOCO MODIFICADO ---
 
 		# Se já spawnou tudo, para de spawnar
 		if enemy_spawned >= max_enemy_per_wave:
 			is_spawning = false
+
 
 func increase_defeated():
 	if enemy_spawned == 0:
@@ -55,30 +64,43 @@ func increase_defeated():
 
 	enemy_defeated += 1
 	print("Derrotados: %d de %d" % [enemy_defeated, enemy_spawned])
-	player.update_wave_progress(enemy_defeated)
+	player.update_wave_progress(enemy_defeated, max_enemy_per_wave)
 
 	if enemy_defeated >= max_enemy_per_wave:
 		enemy_spawned = 0
 		enemy_defeated = 0
 		is_spawning = true
-		player.update_wave_progress(0)
+		player.update_wave_progress(0, max_enemy_per_wave)
 
 		player.levelup()
+		completed_waves += 1
 
 		var wave_info = spawns[current_wave]
 		wave_info.health_multiplier += 0.2
 		wave_info.speed_multiplier += 0.1
 		wave_info.damage_multiplier += 0.15
+		
+		# --- BLOCO ADICIONADO ---
+		# Aumenta a quantidade de inimigos por rajada na próxima wave
+		# Exemplo: Aumenta a cada 2 waves completas para não ser tão rápido
+		if completed_waves % 2 == 0:
+			wave_info.enemies_per_burst += 1
+		
+		# Limita o valor máximo para evitar problemas de performance
+		wave_info.enemies_per_burst = min(wave_info.enemies_per_burst, 15)
+		# --- FIM DO BLOCO ADICIONADO ---
 
 		# Aumenta o número máximo de inimigos na próxima wave
-		max_enemy_per_wave += 5  # pode ajustar esse incremento como quiser
+		max_enemy_per_wave += 5
 
-		print("Wave %d - HP x%.2f | SPD x%.2f | DMG x%.2f | Max Enemies: %d" % [
+		# --- LINHA MODIFICADA ---
+		print("Wave %d - HP x%.2f | SPD x%.2f | DMG x%.2f | Max Enemies: %d | Burst: %d" % [
 			current_wave,
 			wave_info.health_multiplier,
 			wave_info.speed_multiplier,
 			wave_info.damage_multiplier,
-			max_enemy_per_wave
+			max_enemy_per_wave,
+			wave_info.enemies_per_burst # Adicionado para debug
 		])
 
 		current_wave += 1

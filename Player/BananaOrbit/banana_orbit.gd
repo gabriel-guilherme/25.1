@@ -21,21 +21,21 @@ func _ready():
 			angular_speed = 2.0
 			knockback = 0
 		2:
-			damage = 5
+			damage = 7
 			radius = 110.0
 			angular_speed = 2.0
 			knockback = 0
 			#index = 10
 			#total_bananas = 5
 		3:
-			damage = 5
+			damage = 12
 			radius = 120.0
 			angular_speed = 6.0
 			knockback = 100.0
 		4:
-			damage = 8
+			damage = 20
 			radius = 150.0
-			angular_speed = 3.0
+			angular_speed = 8.0
 			knockback = 100.0
 	
 	if total_bananas > 0:
